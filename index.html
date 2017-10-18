@@ -13,11 +13,13 @@
     <span id="logo"><img src="./SH_Logo.svg" alt="SH Logo" width="200" height="50"/></span>
     <section class="container text-center main">
         <h1>Set Up URL Validator</h1>
-        // wrap the input and buttons in a form tag. This is so you can just push enter and it will run itself. 
-        <input id="urlinput" class="form-input" type="text" value="" placeholder="Paste url here to validate"/>
-        <input id="submitBtn" class="btns" type="submit" value="Validate!"/>
-        <input id="clearInput" class="btns" type="submit" value="Clear input field"/>
-        <input id="reset" class="btns" type="submit" value="Reset All"/>
+        <form class="form">
+            <input id="urlinput" class="form-input" type="text" value="" placeholder="Paste url here to validate"/>
+            <input id="submitBtn" class="btns" type="submit" value="Validate!"/>
+            <input id="clearInput" class="btns" type="submit" value="Clear input field"/>
+            <input id="reset" class="btns" type="submit" value="Reset All"/>
+        </form>
+        
     </section>
     <div id="linkText"></div>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -27,15 +29,15 @@
     <script type="text/javascirpt" src="./main.js"></script>
     <script type="text/javascript">
     // looks for spaces and checks if there is a [timestamp] in value of input text. 
-        $("#submitBtn").on('click',()=>{
+        $("#submitBtn").on('click',(e)=>{
+            e.preventDefault();
             var url = $("#urlinput").val();
             if(url.indexOf("<IMG")>-1){
                 if(url.indexOf("[timestamp]")>-1) {
-                    console.log('yepers');
+                    alert('We have found "[timestamp]" in the string. We are going to replace it with ${rand}');
                     var newImgTag = url.replace("<","&lt;").replace("[timestamp]","${rand}").replace(">","&gt;");
-                    console.log(newImgTag);
                     $("#linkText").append("<p>"+"String w/o Spaces:"+"<br/>"+newImgTag+"</p>");
-                    $("p").addClass("linkUrl");
+                    $("p").addClass("link alert-primary");
                 }
             }
             else if(url.indexOf(" ")>-1) {
@@ -44,7 +46,7 @@
                 var newUrl;
                 newUrl = url.replace(/[ ]+/g,"");
                 $("#linkText").append("<p >"+"String w/o Spaces:"+"<br/>"+newUrl+"</p>");
-                $("p").addClass("linkUrl");
+                $("p").addClass("link alert-primary");
             }
             else{alert('Good Job! There are no issues');}
         });
