@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+  <body>
+    <span id="logo"><img src="./SH_Logo.svg" alt="SH Logo" width="200" height="50"/></span>
+    <section class="container text-center main">
+        <h1>Set Up URL Validator</h1>
+        // wrap the input and buttons in a form tag. This is so you can just push enter and it will run itself. 
+        <input id="urlinput" class="form-input" type="text" value="" placeholder="Paste url here to validate"/>
+        <input id="submitBtn" class="btns" type="submit" value="Validate!"/>
+        <input id="clearInput" class="btns" type="submit" value="Clear input field"/>
+        <input id="reset" class="btns" type="submit" value="Reset All"/>
+        <div id="linkText"></div>
+    </section>
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+    <script type="text/javascirpt" src="./main.js"></script>
+    <script type="text/javascript">
+    // looks for spaces and checks if there is a [timestamp] in value of input text. 
+        $("#submitBtn").on('click',()=>{
+            var url = $("#urlinput").val();
+            if(url.indexOf(" ")>-1) {
+                alert('there are spaces in the url. Your string will show up below without spaces.');
+                // Removes all spaces in input text.
+                var newUrl;
+                newUrl = url.replace(/[ ]+/g,"");
+                $("#linkText").append("<p>"+"String w/o Spaces:"+"<br/>"+newUrl+"</p>");}
+                // Checks for [timestatmp] in string and if there alerts user to remove it.
+            else if(url.indexOf(";ord=[timestamp]")>-1){
+                alert('Please replace [timestamp] with [rand]');
+            }else{alert('Good Job! There are no issues');}
+        });
+        // Clears input field
+        $("#clearInput").on('click',()=>{
+            $("#urlinput").val('');
+        })
+        // clears all fields.
+        $("#reset").on('click',()=>{
+            $("#urlinput").val('');
+            $("#linkText").remove();
+        });
+    </script>
+  </body>
+</html>

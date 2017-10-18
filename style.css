@@ -1,0 +1,46 @@
+
+h1 {
+    color: red;
+}
+
+.main {
+    margin-top: 25px;
+}
+
+input {
+    display: block;
+    margin-top: 30px;
+}
+
+input#urlinput {
+    position: relative;
+    left: 160px;
+    margin-right: 20px;
+    width: 800px;
+    height: auto;
+}
+
+.url {
+    margin-top: 15px;
+}
+
+img {
+    margin: 0;
+    padding: 0;
+    left: 0;
+    top: 0;
+}
+
+#text {
+    margin-top: 40px;
+    margin-left: 10px;
+}
+
+.btns {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+#linkText {
+    margin-top: 20px;
+}
